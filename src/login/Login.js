@@ -12,6 +12,7 @@ const headers = {
     Authorization: `Bearer ${cookies.get("token")}`,
   },
 };
+
 function Login() {
   //   const navigate = useNavigate();
   let navigate = useNavigate();
@@ -50,7 +51,7 @@ function Login() {
   return (
     <>
       {/* <Link to="/login"> */}{" "}
-      <div className="conteiner">
+      
       <form className={styles.form}>
         <label>User</label>
         <input
@@ -68,10 +69,12 @@ function Login() {
           Login
         </button>
       </form>
-      </div>
+      
       {/* </Link> */}
     </>
   );
+  
 }
+
 
 export default Login;

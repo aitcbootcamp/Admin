@@ -39,9 +39,6 @@ setValue(e.target.value)
   }
 
  
-  
-
-
 
     return ( 
       <div className='box1'>
