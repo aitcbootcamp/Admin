@@ -50,6 +50,7 @@ function Login() {
   return (
     <>
       {/* <Link to="/login"> */}{" "}
+      <div className="conteiner">
       <form className={styles.form}>
         <label>User</label>
         <input
@@ -67,6 +68,7 @@ function Login() {
           Login
         </button>
       </form>
+      </div>
       {/* </Link> */}
     </>
   );

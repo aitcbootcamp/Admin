@@ -8,7 +8,7 @@ import {
   Route,
   useRoutes,
 } from "react-router-dom";
-import Home from "./pages/Home.js";
+
 import Products from "./pages/Products.js";
 import Category from "./pages/Category.js";
 import Orders from "./pages/Orders";
@@ -33,7 +33,7 @@ function App() {
                   <NavBar />
 
                   <Routes>
-                    <Route path="/home" exact element={<Home />} />
+                   
                     <Route path="/products" element={<Products />} />
                     <Route path="/category" element={<Category />} />
                     <Route path="/orders" element={<Orders />} />

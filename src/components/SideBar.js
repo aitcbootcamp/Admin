@@ -5,12 +5,7 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 
 export const SideBar = [
-  {
-    titles: "Home",
-    path: "home",
-    icons: <AiIcons.AiFillHome className="img3" />,
-    cName: "nav-text",
-  },
+  
   {
     titles: "Products",
     path: "products",
@@ -33,7 +28,7 @@ export const SideBar = [
 
   {
     titles: "Category",
-    path: "/main/category",
+    path: "category",
     icons: <FaIcons.FaCartArrowDown className="img0" />,
     cName: "nav-text",
   },

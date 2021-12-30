@@ -1,7 +1,7 @@
 import "../App.css";
 import NavBar from "./NavBar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../pages/Home.js";
+
 import Products from "../pages/Products.js";
 import Category from "../pages/Category.js";
 import Orders from "../pages/Orders";
@@ -15,7 +15,7 @@ function Homepage() {
       {/* <Router> */}
       <NavBar />
       <Routes>
-        <Route path="/" exact element={<Home />} />
+        
         <Route path="/products" element={<Products />} />
         <Route path="/category" element={<Category />} />
         <Route path="/orders" element={<Orders />} />

@@ -4,20 +4,37 @@
     height:85vh;
     
 }
-.title{ border:solid blue;
-    border-style: none;
-    background: linear-gradient(  #90d3ee, #9198e5);
+
+
+.box1{ background-color: rgba(25, 118, 161, 0.89);
+     display: flex;
+    flex-direction: column;
     color: #fff;
-    width: 60vh;
-    height: 20vh;
-    font-size: 19px;
-    opacity: 1;
-      
+    font-size: 20px;
+    align-items: center;
+    border-radius: 20px;
+    width: 400px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem;
+   
 }
+.title{
+    margin-top: 1rem;
+    list-style: none;
+}
+
+
+
+
  .couriers{
      background-image: url(/src/wp6044990.jpg);
      background-repeat: no-repeat;
-     height: 88vh;
-    
+     height: 88vh;    
  
+ }
+
+ .orders{
+     background-image: url(/src/83-834379_-.png);
  }
