@@ -33,7 +33,7 @@ export const SideBar = [
 
   {
     titles: "Category",
-    path: "/main/category",
+    path: "category",
     icons: <FaIcons.FaCartArrowDown className="img0" />,
     cName: "nav-text",
   },

@@ -1,40 +1,60 @@
 import React from "react";
 import HpImg from "../img/HPPavilion.jpg";
-import classes from "./Prodacts.module.css";
+import classes from "./AllProducts.module.css";
 import axios from "axios";
 // prodacLisEdit Js/Css
 import ProdactsListEdit from "./ProdactsListEdit";
-import { useState, useEffect } from "react";
-const Prodacts = (props) => {
-  const [edit, setEdit] = useState(false);
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../store/authContext";
+import Product from "./Product";
+import Cookies from "universal-cookie";
+import AddProduct from "./AddProduct";
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/data.json").then((res) => {
-      console.log(res.data)
-    });
-  }, []);
+const cookies = new Cookies();
+// import ProdactsListEdit from "./ProdactsListEdit";
+const Products = (props) => {
+  const collectData = (data) => {
+    return data;
+  };
+  const { products, setProducts, edit, setEdit } = useContext(AuthContext);
+  const [addbtn, setAddbtn] = useState(false);
+  const add = (e) => {
+    setAddbtn(true);
+  };
+  const addProduct = () => {
+    console.log(collectData());
 
+    axios.post(
+      "http://206.189.198.66/api/create_product",
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + cookies.get("token"),
+        },
+      },
+      collectData(),
+      { withCredentials: true }
+    );
+  };
+  // console.log(products);
   return (
     <>
-      <h1>Products</h1>
-      <div className={classes.prodactsList}>
-        <img src={HpImg} alt="laptop" />
-        <p>{props.name}</p>
-        <p>{props.price}$</p>
-        <div>
-          <button
-            className={classes.buttonAddition}
-            onClick={() => setEdit(true)}
-          >
-            edit
-          </button>
-        </div>
-        <br />
-        <button className={classes.buttonDelete}>delete</button>
+      <button onClick={add}>Add Product</button>
+      {addbtn && <AddProduct setEdit={setAddbtn} saveData={addProduct} />}
+      <div className={classes.wrapper}>
+        {products.map((product) => (
+          <Product
+            name={product.title}
+            img={product.img}
+            price={product.price}
+            key={product.id}
+            id={product.id}
+          />
+        ))}
       </div>
-      <div>{edit && <ProdactsListEdit setEdit={setEdit} />}</div>
     </>
   );
 };
 
-export default Prodacts;
+export default Products;

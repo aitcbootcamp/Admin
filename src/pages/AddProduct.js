@@ -6,7 +6,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import Save from "./save";
 const cookies = new Cookies();
-const ProdactsListEdit = (props) => {
+const AddProduct = (props) => {
   let { getcategory } = useContext(AuthContext);
   const [img1, setImg1] = useState("");
   const [img2, setImg2] = useState("");
@@ -43,11 +43,8 @@ const ProdactsListEdit = (props) => {
       img3: img3,
       quantity: 100,
     };
-
-    props.collectData(data);
-    console.log(cookies.get("token"));
-    axios.put(
-      `http://206.189.198.66/api/update_product/${props.id}`,
+    axios.post(
+      "http://206.189.198.66/api/create_product",
       data,
       {
         headers: {
@@ -55,10 +52,9 @@ const ProdactsListEdit = (props) => {
           Authorization: "Bearer " + cookies.get("token"),
         },
       },
+
       { withCredentials: true }
     );
-
-    console.log(data);
   };
 
   console.log(getcategory[0].title);
@@ -124,7 +120,7 @@ const ProdactsListEdit = (props) => {
           setDescription(e.target.value);
         }}
       />
-      <Save saveData={saveData} />
+      <button onClick={saveData}>save</button>
       <br />
 
       <button onClick={() => props.setEdit(false)}>close </button>
@@ -132,4 +128,4 @@ const ProdactsListEdit = (props) => {
   );
 };
 
-export default ProdactsListEdit;
+export default AddProduct;
