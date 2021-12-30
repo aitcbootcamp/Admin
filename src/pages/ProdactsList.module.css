@@ -1,0 +1,36 @@
+.list{
+    display: inline-block;
+    position: relative;
+    top: -450px;
+    left: 400px;
+    padding: 20px;
+}
+.list input {
+    padding: 8px;
+    outline: none;
+    border-radius: 4px;
+    margin: 5px 0;
+}
+.list button{
+    margin-right: 70px;
+    cursor: pointer;
+    border:2px solid rgba(0, 0, 0, 0.527);
+    border-radius: 5px;
+    padding: 5px 9px;
+    background: rgba(71, 67, 67, 0.514);
+    color: white;
+    
+}
+.list p {
+    font-style: italic;
+    text-transform:capitalize;
+}
+.list textarea{
+    resize: none;
+    width: 170px;
+    height: 100px;
+    outline: none;
+    border: 2px inset rgba(0, 0, 0);
+    border-radius: 5px;
+    margin: 5px 0;
+}
