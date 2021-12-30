@@ -1,0 +1,11 @@
+.button {
+  border: none;
+  background-color: inherit;
+  color: white;
+  margin-right: 20px;
+  font-size: 1.1rem;
+}
+
+.button:hover {
+  text-decoration: underline;
+}
