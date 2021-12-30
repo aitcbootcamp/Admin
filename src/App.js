@@ -1,30 +1,54 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
-import {BrowserRouter as Router, Routes, Route}
-from "react-router-dom"; 
-import Home from "./pages/Home.js"
-import Prodacts from "./pages/Prodacts.js"
-import Category from"./pages/Category.js"
-import Orders from"./pages/Orders" 
-import Couriers from"./pages/Couriers" 
-
+import Homepage from "./components/Homepage";
+import PrivateRoute from "./components/PrivateRoute";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useRoutes,
+} from "react-router-dom";
+import Home from "./pages/Home.js";
+import Products from "./pages/Products.js";
+import Category from "./pages/Category.js";
+import Orders from "./pages/Orders";
+import Couriers from "./pages/Couriers";
+import Login from "./login/Login";
+// import { useState, useEffect, useContext } from "react";
+import { AuthProvider, AuthContext } from "./store/authContext";
+// import Cookies from "universal-cookie";
+import { Errorpage } from "./components/ErrorPage";
 function App() {
   return (
-  <>
- <Router>
-   <NavBar />
-   <Routes>
-     <Route path="/" exact element={<Home/>}/>
-     <Route path="/prodacts" element={<Prodacts/>}/>
-     <Route path="/category" element={<Category/>}/>
-     <Route path="/orders" element={<Orders/>}/>
-     <Route path="/couriers" element={<Couriers/>}/>
-   </Routes>
- </Router>
-  
-  
-  </>
-  )
+    <>
+      <AuthProvider>
+        {/* <Login></Login> */}
+        <Router>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/*"
+              element={
+                <PrivateRoute>
+                  <NavBar />
+
+                  <Routes>
+                    <Route path="/home" exact element={<Home />} />
+                    <Route path="/products" element={<Products />} />
+                    <Route path="/category" element={<Category />} />
+                    <Route path="/orders" element={<Orders />} />
+                    <Route path="/couriers" element={<Couriers />} />
+                  </Routes>
+                </PrivateRoute>
+              }
+            />
+            <Route path="*" element={<Errorpage />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </>
+  );
 }
 
 export default App;
+
