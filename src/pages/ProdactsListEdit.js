@@ -13,6 +13,7 @@ const ProdactsListEdit = (props) => {
   const [img3, setImg3] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
+  const [quantity, setQuantity] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
 
@@ -37,11 +38,11 @@ const ProdactsListEdit = (props) => {
       title: name,
       category_id: categoryID(),
       description: description,
-      price: 100,
+      price: price,
       img: img1,
       img2: img2,
       img3: img3,
-      quantity: 100,
+      quantity: quantity,
     };
 
     props.collectData(data);
@@ -64,32 +65,36 @@ const ProdactsListEdit = (props) => {
   console.log(getcategory[0].title);
   return (
     <div id={props.id} className={classes.list}>
-      <p>img 1</p>
+      <label HTMLfor="img1">Image 1</label>
       <input
+        name="img1"
         type="text"
         value={img1}
         onChange={(e) => {
           setImg1(e.target.value);
         }}
       />
-      <p>img 2</p>
+      <label HTMLfor="img2">Image 2</label>
       <input
+        name="img2"
         type="text"
         value={img2}
         onChange={(e) => {
           setImg2(e.target.value);
         }}
       />
-      <p>img 3</p>
+      <label HTMLfor="img3">Image 3</label>
       <input
+        name="img3"
         type="text"
         value={img3}
         onChange={(e) => {
           setImg3(e.target.value);
         }}
       />
-      <p>name</p>
+      <label HTMLfor="name">Name</label>
       <input
+        name="name"
         type="text"
         value={name}
         onChange={(e) => {
@@ -97,8 +102,9 @@ const ProdactsListEdit = (props) => {
         }}
       />
       <div>
-        <p>Category</p>
+        <label HTMLfor="category">Category</label>
         <select
+          name="category"
           value={category}
           onChange={(e) => {
             setCategory(e.target.value);
@@ -108,23 +114,35 @@ const ProdactsListEdit = (props) => {
           ))}
         </select>
       </div>
-      <p>price: </p>
+      <label HTMLfor="price">Price</label>
       <input
+        name="price"
         type="text"
         value={price}
         onChange={(e) => {
           setPrice(e.target.value);
         }}
       />
-      <p>description</p>
+      <label HTMLfor="description">Description</label>
       <textarea
+        name="description"
         type="text"
         value={description}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
       />
-      <Save saveData={saveData} />
+      <label HTMLfor="quantity">Quantty</label>
+      <input
+        type="text"
+        name="quantity"
+        value={quantity}
+        onChange={(e) => {
+          setQuantity(e.target.value);
+        }}
+      />
+
+      <Save saveData={saveData} setEdit={props.setEdit} />
       <br />
 
       <button onClick={() => props.setEdit(false)}>close </button>

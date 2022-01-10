@@ -25,6 +25,7 @@
   padding: 5px 9px;
   background: rgba(71, 67, 67, 0.514);
   color: white;
+  display: block;
 }
 .list p {
   font-style: italic;
@@ -37,5 +38,9 @@
   outline: none;
   border: none;
   border-radius: 5px;
-  margin: 5px 0;
+  display: block;
+  margin: 5px auto;
+}
+.list label {
+  display: block;
 }

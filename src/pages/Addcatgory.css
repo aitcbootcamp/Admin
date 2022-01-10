@@ -1,40 +1,35 @@
-.category{
-    background-image: url(/src/computer-simple-purple-gradient-icons-set-vector-21374314.jpg);
-    width: 1180px;
-    height:85vh;
-    
+.category {
+  background-image: url(/src/computer-simple-purple-gradient-icons-set-vector-21374314.jpg);
+  width: 1180px;
+  height: 85vh;
 }
 
-
-.box1{ background-color: rgba(25, 118, 161, 0.89);
-     display: flex;
-    flex-direction: column;
-    color: #fff;
-    font-size: 20px;
-    align-items: center;
-    border-radius: 20px;
-    width: 400px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5rem;
-   
+.box1 {
+  background-color: rgba(25, 118, 161, 0.89);
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-size: 20px;
+  align-items: center;
+  border-radius: 20px;
+  width: 400px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  overflow-y: scroll;
 }
-.title{
-    margin-top: 1rem;
-    list-style: none;
+.title {
+  margin-top: 1rem;
+  list-style: none;
 }
 
+.couriers {
+  background-image: url(/src/wp6044990.jpg);
+  background-repeat: no-repeat;
+  height: 88vh;
+}
 
-
-
- .couriers{
-     background-image: url(/src/wp6044990.jpg);
-     background-repeat: no-repeat;
-     height: 88vh;    
- 
- }
-
- .orders{
-     background-image: url(/src/83-834379_-.png);
- }
+.orders {
+  background-image: url(/src/83-834379_-.png);
+}
