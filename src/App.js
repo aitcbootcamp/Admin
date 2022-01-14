@@ -33,7 +33,8 @@ function App() {
                   <NavBar />
 
                   <Routes>
-                   
+                    <Route path="/" element={<Products />} />
+
                     <Route path="/products" element={<Products />} />
                     <Route path="/category" element={<Category />} />
                     <Route path="/orders" element={<Orders />} />
@@ -51,4 +52,3 @@ function App() {
 }
 
 export default App;
-

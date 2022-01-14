@@ -5,11 +5,17 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 
 export const SideBar = [
-  
   {
     titles: "Products",
     path: "products",
     icons: <FaIcons.FaCartPlus className="img2" />,
+    cName: "nav-text",
+  },
+
+  {
+    titles: "Categories",
+    path: "category",
+    icons: <FaIcons.FaCartArrowDown className="img0" />,
     cName: "nav-text",
   },
 
@@ -23,13 +29,6 @@ export const SideBar = [
     titles: "Orders",
     path: "orders",
     icons: <IoIcons.IoMdClipboard className="img" />,
-    cName: "nav-text",
-  },
-
-  {
-    titles: "Category",
-    path: "category",
-    icons: <FaIcons.FaCartArrowDown className="img0" />,
     cName: "nav-text",
   },
 ];

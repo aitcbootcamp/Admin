@@ -4,12 +4,18 @@ import "./Addcatgory.css";
 import Cookies from "universal-cookie";
 
 import { useState, useEffect } from "react";
+const cookies = new Cookies(); //cookies
 
 // import { Link } from 'react-router-dom';
 const Category = () => {
   const [value, setValue] = useState("");
   const [category, setCategory] = useState([]);
-
+  const headers = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${cookies.get("token")}`,
+    },
+  };
   useEffect(() => {
     axios.get("http://206.189.198.66/get_categories").then((res) => {
       console.log(res.data.userData);
@@ -22,8 +28,16 @@ const Category = () => {
     setValue(e.target.value);
   };
 
-  const cookies = new Cookies(); //cookies
-
+  const deleteHandler = (id) => {
+    // axios
+    //   .delete(`http://206.189.198.66/api/delete_product/${id}`, headers, {
+    //     withCredentials: true,
+    //   })
+    //   .then((resp) => {
+    //     setCategory(resp.data.data);
+    //   });
+    console.log(id);
+  };
   const addcategory = () => {
     console.log(value);
     axios
@@ -33,31 +47,32 @@ const Category = () => {
           title: value,
           description: "",
         },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${cookies.get("token")}`,
-          },
-        },
+        headers,
         { withCredentials: true }
       )
-      .then((response) => console.log(response));
+      .then((response) => {
+        const data = response.data.data;
+        setCategory(data);
+      });
 
     setValue("");
   };
 
   return (
-    <div className="box1">
-      <ul>
-        <input value={value} onChange={inputChange}></input>{" "}
-        <button onClick={() => addcategory()}>ADD</button>
-        {category.map((category) => (
-          <li className="title" key={category.id}>
-            {category.title}{" "}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="box1">
+        <ul>
+          <input value={value} onChange={inputChange}></input>{" "}
+          <button onClick={() => addcategory()}>ADD</button>
+          {category.map((category) => (
+            <li className="title" key={category.id}>
+              {category.title}{" "}
+              <span onClick={() => deleteHandler(category.id)}>x</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

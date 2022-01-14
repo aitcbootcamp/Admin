@@ -7,15 +7,20 @@ import Cookies from "universal-cookie";
 import Save from "./save";
 const cookies = new Cookies();
 const ProdactsListEdit = (props) => {
-  let { getcategory } = useContext(AuthContext);
-  const [img1, setImg1] = useState("");
-  const [img2, setImg2] = useState("");
-  const [img3, setImg3] = useState("");
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [quantity, setQuantity] = useState("");
-  const [category, setCategory] = useState("");
-  const [description, setDescription] = useState("");
+  let { getcategory, products, setProducts, edit, setEdit } =
+    useContext(AuthContext);
+  const filteredcategory = getcategory
+    .filter((cat) => cat.id === props.category_id)
+    .map((cat) => cat.title)
+    .join("");
+  const [img1, setImg1] = useState(props.img1);
+  const [img2, setImg2] = useState(props.img2);
+  const [img3, setImg3] = useState(props.img3);
+  const [name, setName] = useState(props.name);
+  const [price, setPrice] = useState(props.price);
+  const [quantity, setQuantity] = useState(props.quantity);
+  const [category, setCategory] = useState(filteredcategory);
+  const [description, setDescription] = useState(props.description);
 
   const categoryID = () => {
     // console.log(category);
@@ -26,6 +31,7 @@ const ProdactsListEdit = (props) => {
       .map((cat) => parseInt(cat.id));
     return id[0];
   };
+  console.log(filteredcategory);
   console.log(categoryID());
   const headers = {
     headers: {
@@ -44,28 +50,32 @@ const ProdactsListEdit = (props) => {
       img3: img3,
       quantity: quantity,
     };
-
-    props.collectData(data);
-    console.log(cookies.get("token"));
-    axios.put(
-      `http://206.189.198.66/api/update_product/${props.id}`,
-      data,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + cookies.get("token"),
-        },
-      },
-      { withCredentials: true }
-    );
-
     console.log(data);
+    // props.collectData(data);
+    console.log(cookies.get("token"));
+    axios
+      .put(
+        `http://206.189.198.66/api/update_product/${props.id}`,
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + cookies.get("token"),
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((resp) => {
+        setProducts(resp.data.message);
+      });
   };
-
-  console.log(getcategory[0].title);
+  const saveAndClose = () => {
+    saveData();
+    props.setEdit(false);
+  };
   return (
     <div id={props.id} className={classes.list}>
-      <label HTMLfor="img1">Image 1</label>
+      <label htmlFor="img1">Image 1</label>
       <input
         name="img1"
         type="text"
@@ -74,7 +84,7 @@ const ProdactsListEdit = (props) => {
           setImg1(e.target.value);
         }}
       />
-      <label HTMLfor="img2">Image 2</label>
+      <label htmlFor="img2">Image 2</label>
       <input
         name="img2"
         type="text"
@@ -83,7 +93,7 @@ const ProdactsListEdit = (props) => {
           setImg2(e.target.value);
         }}
       />
-      <label HTMLfor="img3">Image 3</label>
+      <label htmlFor="img3">Image 3</label>
       <input
         name="img3"
         type="text"
@@ -92,7 +102,7 @@ const ProdactsListEdit = (props) => {
           setImg3(e.target.value);
         }}
       />
-      <label HTMLfor="name">Name</label>
+      <label htmlFor="name">Name</label>
       <input
         name="name"
         type="text"
@@ -102,7 +112,7 @@ const ProdactsListEdit = (props) => {
         }}
       />
       <div>
-        <label HTMLfor="category">Category</label>
+        <label htmlFor="category">Category</label>
         <select
           name="category"
           value={category}
@@ -110,11 +120,14 @@ const ProdactsListEdit = (props) => {
             setCategory(e.target.value);
           }}>
           {getcategory.map((category) => (
-            <option key={category.id}> {category.title}</option>
+            <option key={category.id} defaultValue>
+              {" "}
+              {category.title}
+            </option>
           ))}
         </select>
       </div>
-      <label HTMLfor="price">Price</label>
+      <label htmlFor="price">Price</label>
       <input
         name="price"
         type="text"
@@ -123,7 +136,7 @@ const ProdactsListEdit = (props) => {
           setPrice(e.target.value);
         }}
       />
-      <label HTMLfor="description">Description</label>
+      <label htmlFor="description">Description</label>
       <textarea
         name="description"
         type="text"
@@ -132,17 +145,17 @@ const ProdactsListEdit = (props) => {
           setDescription(e.target.value);
         }}
       />
-      <label HTMLfor="quantity">Quantty</label>
+      <label htmlFor="quantity">Quantty</label>
       <input
         type="text"
         name="quantity"
-        value={quantity}
+        // value={quantity}
         onChange={(e) => {
           setQuantity(e.target.value);
         }}
       />
 
-      <Save saveData={saveData} setEdit={props.setEdit} />
+      <button onClick={() => saveAndClose()}>save</button>
       <br />
 
       <button onClick={() => props.setEdit(false)}>close </button>

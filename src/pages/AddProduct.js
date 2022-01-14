@@ -7,7 +7,8 @@ import Cookies from "universal-cookie";
 import Save from "./save";
 const cookies = new Cookies();
 const AddProduct = (props) => {
-  let { getcategory } = useContext(AuthContext);
+  let { getcategory, products, setProducts, edit, setEdit } =
+    useContext(AuthContext);
   const [img1, setImg1] = useState("");
   const [img2, setImg2] = useState("");
   const [img3, setImg3] = useState("");
@@ -15,6 +16,7 @@ const AddProduct = (props) => {
   const [price, setPrice] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState(0);
 
   const categoryID = () => {
     // console.log(category);
@@ -25,67 +27,71 @@ const AddProduct = (props) => {
       .map((cat) => parseInt(cat.id));
     return id[0];
   };
-  console.log(categoryID());
-  const headers = {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${cookies.get("token")}`,
-    },
-  };
+
   const saveData = () => {
     const data = {
       title: name,
       category_id: categoryID(),
       description: description,
-      price: 100,
+      price: price,
       img: img1,
       img2: img2,
       img3: img3,
-      quantity: 100,
+      quantity: parseInt(quantity),
     };
-    axios.post(
-      "http://206.189.198.66/api/create_product",
-      data,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + cookies.get("token"),
+    axios
+      .post(
+        "http://206.189.198.66/api/create_product",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + cookies.get("token"),
+          },
         },
-      },
 
-      { withCredentials: true }
-    );
+        { withCredentials: true }
+      )
+      .then((resp) => setProducts(resp.data.data));
+    console.log(quantity);
   };
-
-  console.log(getcategory[0].title);
+  const saveAndClose = () => {
+    saveData();
+    props.setEdit(false);
+  };
   return (
     <div id={props.id} className={classes.list}>
-      <p>img 1</p>
+      <label htmlFor="img1">Image 1</label>
       <input
+        required
+        name="img1"
         type="text"
         value={img1}
         onChange={(e) => {
           setImg1(e.target.value);
         }}
       />
-      <p>img 2</p>
+      <label htmlFor="img2">Image 2</label>
       <input
+        name="img2"
         type="text"
         value={img2}
         onChange={(e) => {
           setImg2(e.target.value);
         }}
       />
-      <p>img 3</p>
+      <label htmlFor="img3">Image 3</label>
       <input
+        name="img3"
         type="text"
         value={img3}
         onChange={(e) => {
           setImg3(e.target.value);
         }}
       />
-      <p>name</p>
+      <label htmlFor="name">Name</label>
       <input
+        name="name"
         type="text"
         value={name}
         onChange={(e) => {
@@ -93,34 +99,51 @@ const AddProduct = (props) => {
         }}
       />
       <div>
-        <p>Category</p>
+        <label htmlFor="category">Category</label>
         <select
+          name="category"
+          placeholder="select category"
           value={category}
           onChange={(e) => {
             setCategory(e.target.value);
           }}>
+          <option value="" disabled selected>
+            Select Category
+          </option>
           {getcategory.map((category) => (
             <option key={category.id}> {category.title}</option>
           ))}
         </select>
       </div>
-      <p>price: </p>
+      <label htmlFor="price">Price</label>
       <input
+        name="price"
         type="text"
         value={price}
         onChange={(e) => {
           setPrice(e.target.value);
         }}
       />
-      <p>description</p>
+      <label htmlFor="description">Description</label>
       <textarea
+        name="description"
         type="text"
         value={description}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
       />
-      <button onClick={saveData}>save</button>
+      <label htmlFor="quantity">Quantty</label>
+      <input
+        type="text"
+        name="quantity"
+        value={quantity}
+        onChange={(e) => {
+          setQuantity(e.target.value);
+        }}
+      />
+
+      <button onClick={() => saveAndClose()}>save</button>
       <br />
 
       <button onClick={() => props.setEdit(false)}>close </button>
