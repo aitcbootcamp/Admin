@@ -29,13 +29,13 @@ const Category = () => {
   };
 
   const deleteHandler = (id) => {
-    // axios
-    //   .delete(`http://206.189.198.66/api/delete_product/${id}`, headers, {
-    //     withCredentials: true,
-    //   })
-    //   .then((resp) => {
-    //     setCategory(resp.data.data);
-    //   });
+    axios
+      .delete(`http://206.189.198.66/api/delete_category/${id}`, headers, {
+        withCredentials: true,
+      })
+      .then((resp) => {
+        setCategory(resp.data.data);
+      });
     console.log(id);
   };
   const addcategory = () => {
